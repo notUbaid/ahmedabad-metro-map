@@ -18,6 +18,7 @@ export interface MetroData {
   lines: {
     'east-west': MetroLine;
     'north-south': MetroLine;
+    'north-south-branch'?: MetroLine;
   };
 }
 

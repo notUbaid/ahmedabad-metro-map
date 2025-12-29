@@ -37,6 +37,16 @@ export function useMetroData() {
       }
     });
 
+    // Process branch line stations (they're already in main line, just mark them)
+    if (data.lines['north-south-branch']) {
+      data.lines['north-south-branch'].stations.forEach(station => {
+        const existing = stationMap.get(station.name);
+        if (existing && !existing.lines.includes('north-south')) {
+          existing.lines.push('north-south');
+        }
+      });
+    }
+
     return Array.from(stationMap.values());
   }, [data]);
 
@@ -63,6 +73,7 @@ export function useMetroData() {
 
   const eastWestStations = data.lines['east-west'].stations;
   const northSouthStations = data.lines['north-south'].stations;
+  const branchStations = data.lines['north-south-branch']?.stations || [];
   const eastWestColor = data.lines['east-west'].color;
   const northSouthColor = data.lines['north-south'].color;
 
@@ -70,6 +81,7 @@ export function useMetroData() {
     allStations,
     eastWestStations,
     northSouthStations,
+    branchStations,
     eastWestColor,
     northSouthColor,
     findNearestStation,
