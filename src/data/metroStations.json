@@ -1,0 +1,35 @@
+{
+  "lines": {
+    "east-west": {
+      "name": "East-West Line",
+      "color": "#3B82F6",
+      "stations": [
+        { "id": "ew1", "name": "Vastral Gam", "lat": 23.0225, "lng": 72.6647, "interchange": false },
+        { "id": "ew2", "name": "Nirant Cross Road", "lat": 23.0215, "lng": 72.6450, "interchange": false },
+        { "id": "ew3", "name": "Rabari Colony", "lat": 23.0210, "lng": 72.6280, "interchange": false },
+        { "id": "ew4", "name": "Apparel Park", "lat": 23.0205, "lng": 72.6100, "interchange": false },
+        { "id": "ew5", "name": "Amraiwadi", "lat": 23.0195, "lng": 72.5950, "interchange": false },
+        { "id": "ew6", "name": "Kalupur Railway Station", "lat": 23.0225, "lng": 72.6010, "interchange": false },
+        { "id": "ew7", "name": "Gheekanta", "lat": 23.0235, "lng": 72.5850, "interchange": false },
+        { "id": "ew8", "name": "Old High Court", "lat": 23.0250, "lng": 72.5710, "interchange": true },
+        { "id": "ew9", "name": "Shahpur", "lat": 23.0300, "lng": 72.5600, "interchange": false },
+        { "id": "ew10", "name": "Kankaria East", "lat": 23.0100, "lng": 72.5900, "interchange": false },
+        { "id": "ew11", "name": "Thaltej Gam", "lat": 23.0450, "lng": 72.5010, "interchange": false }
+      ]
+    },
+    "north-south": {
+      "name": "North-South Line",
+      "color": "#EF4444",
+      "stations": [
+        { "id": "ns1", "name": "Motera Stadium", "lat": 23.0950, "lng": 72.5950, "interchange": false },
+        { "id": "ns2", "name": "Sabarmati", "lat": 23.0750, "lng": 72.5900, "interchange": false },
+        { "id": "ns3", "name": "Ranip", "lat": 23.0650, "lng": 72.5850, "interchange": false },
+        { "id": "ns4", "name": "Gujarat University", "lat": 23.0400, "lng": 72.5450, "interchange": false },
+        { "id": "ns5", "name": "Commerce Six Roads", "lat": 23.0350, "lng": 72.5550, "interchange": false },
+        { "id": "ns6", "name": "Old High Court", "lat": 23.0250, "lng": 72.5710, "interchange": true },
+        { "id": "ns7", "name": "Vadaj", "lat": 23.0500, "lng": 72.5350, "interchange": false },
+        { "id": "ns8", "name": "APMC", "lat": 22.9900, "lng": 72.5650, "interchange": false }
+      ]
+    }
+  }
+}
