@@ -2,7 +2,7 @@ import { MetroMap } from '@/components/MetroMap';
 
 const Index = () => {
   return (
-    <main className="h-screen w-screen overflow-hidden">
+    <main style={{ height: '100vh', width: '100vw', overflow: 'hidden' }}>
       <MetroMap />
     </main>
   );
