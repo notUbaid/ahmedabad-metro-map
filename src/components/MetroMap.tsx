@@ -146,8 +146,6 @@ export function MetroMap() {
       marker.bindPopup(`${station.name}<br>Lat: ${station.lat.toFixed(6)}, Lng: ${station.lng.toFixed(6)}`);
       marker.on('click', () => {
         setSelectedStation(station);
-        // Log coordinates to console for easy copying
-        console.log(`${station.name}: { "lat": ${station.lat}, "lng": ${station.lng} }`);
       });
       markersRef.current.push(marker);
     });
