@@ -1,5 +1,6 @@
 import { X, Train, Clock, ArrowRight } from 'lucide-react';
 import type { MetroStation } from '@/types/metro';
+import { useTimetable } from '../hooks/useTimetable';
 
 interface StationBottomSheetProps {
   station: MetroStation & { lines?: ('east-west' | 'north-south')[] };
@@ -8,6 +9,7 @@ interface StationBottomSheetProps {
 
 export function StationBottomSheet({ station, onClose }: StationBottomSheetProps) {
   const lines = station.lines || (station.line ? [station.line] : []);
+  const nextTrains = useTimetable(station.name);
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-[2000]">
@@ -68,37 +70,50 @@ export function StationBottomSheet({ station, onClose }: StationBottomSheetProps
             <Clock className="w-4 h-4" />
             Next Trains
           </h3>
-          <div className="space-y-2">
-            {lines.map((line) => (
-              <div
-                key={line}
-                className="flex items-center justify-between p-3 rounded-lg bg-muted/30"
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`w-3 h-3 rounded-full ${
-                      line === 'east-west' ? 'bg-metro-blue' : 'bg-metro-red'
-                    }`}
-                  />
-                  <div>
+          <div className="space-y-3">
+            {Object.keys(nextTrains).length > 0 ? (
+              Object.entries(nextTrains).map(([direction, trains]) => (
+                <div
+                  key={direction}
+                  className="flex flex-col gap-2 p-3 rounded-lg bg-muted/30"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <div
+                      className={`w-2.5 h-2.5 rounded-full ${
+                        direction.includes('East') || direction.includes('West')
+                          ? 'bg-metro-blue'
+                          : 'bg-metro-red'
+                      }`}
+                    />
                     <p className="text-sm font-medium text-foreground">
-                      {line === 'east-west' ? 'Vastral – Thaltej' : 'Motera – APMC'}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {line === 'east-west' ? 'East–West Line' : 'North–South Line'}
+                      {direction}
                     </p>
                   </div>
+                  {trains.length > 0 ? (
+                    trains.map((train, idx) => (
+                      <div key={idx} className="flex items-center justify-between pl-4">
+                        <span className="text-sm text-muted-foreground">
+                          {train.time}
+                        </span>
+                        <div className="flex items-center gap-2 text-foreground font-medium">
+                          <span className="text-sm">
+                            {train.minutesAway <= 0 ? 'Due' : `in ${train.minutesAway} min`}
+                          </span>
+                          <ArrowRight className="w-3.5 h-3.5 text-muted-foreground" />
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-xs text-muted-foreground pl-4">No more trains today</p>
+                  )}
                 </div>
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <span className="text-sm">--:-- min</span>
-                  <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="text-sm text-muted-foreground text-center py-2">
+                No schedule data available
+              </p>
+            )}
           </div>
-          <p className="text-xs text-muted-foreground mt-3 text-center">
-            Real-time schedules coming soon
-          </p>
         </div>
       </div>
     </div>

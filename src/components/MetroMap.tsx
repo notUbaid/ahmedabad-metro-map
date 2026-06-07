@@ -6,6 +6,7 @@ import { useMetroData } from '@/hooks/useMetroData';
 import { SearchBar } from './SearchBar';
 import { NearestStationCard } from './NearestStationCard';
 import { StationBottomSheet } from './StationBottomSheet';
+import { AnimatedTrainsLayer } from './AnimatedTrainsLayer';
 import type { MetroStation, NearestStation, UserLocation } from '@/types/metro';
 
 export function MetroMap() {
@@ -16,6 +17,7 @@ export function MetroMap() {
   const userMarkerRef = useRef<L.CircleMarker | null>(null);
   const hasInitializedRef = useRef(false);
   const hasCenteredOnUserRef = useRef(false);
+  const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
 
   const { location: userLocation } = useGeolocation();
   const {
@@ -57,10 +59,12 @@ export function MetroMap() {
     }).addTo(map);
 
     mapInstanceRef.current = map;
+    setMapInstance(map);
 
     return () => {
       map.remove();
       mapInstanceRef.current = null;
+      setMapInstance(null);
     };
   }, []);
 
@@ -193,6 +197,8 @@ export function MetroMap() {
   return (
     <div style={{ height: '100%', width: '100%', position: 'relative', background: '#1a1a2e' }}>
       <div ref={mapRef} style={{ height: '100%', width: '100%' }} />
+
+      {mapInstance && <AnimatedTrainsLayer map={mapInstance} />}
 
       <SearchBar onLocationSelect={setSearchLocation} />
 
